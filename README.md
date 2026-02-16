@@ -1,0 +1,1 @@
+This repository holds my very first GitHub project as a 1st year college student — a personal website that symbolizes the beginning of my journey in tech, creativity, and continuous growth in the world of programming.![cahsduw](https://github.com/user-attachments/assets/4451c858-ef35-40fc-ba6f-024f1429c68b)
