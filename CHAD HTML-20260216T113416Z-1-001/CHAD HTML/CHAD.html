@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chad's Personal Website</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --hobby-desc-top: 5%;    
+      --hobby-desc-right: 47%;  
+      --hobby-desc-size: 1.4rem; 
+      --hobbies-title-top: 75%;
+      --hobbies-title-left: 43%;
+      --hobbies-title-size: 5rem;
+
+      --hobby-box-top: 85px;
+      --hobby-box-right: 32%;
+      --hobby-box-width: 42%;
+      --hobby-box-height: 440px;
+      --hobby-box-gap: 35px;
+      --hobby-each-height: 22%;
+      --hobby-box-padding: 18px 24px;
+      --hobby-font-family: VT323, monospace;
+      --hobby-font-size: 1.3rem;
+      --hobby-font-color: #3d2817; 
+
+      --bg-pos: center bottom;
+      --banner-text-top: 45%;
+      --banner-text-left: 40%;
+      --banner-font-size: 17px;
+      --banner-text-color: #ffffff;
+
+      --about-text-top: 28%;
+      --about-text-right: 29%;
+      --skill-1-top: 29%;  --skill-1-left: 26%;
+      --skill-2-top: 29%;  --skill-2-left: 61%;
+      --skill-3-top: 55%;  --skill-3-left: 26%;
+      --skill-4-top: 55%;  --skill-4-left: 60%;
+      --achievements-top:    20%;    --achievements-left: 75%;
+      --achievements-size:   4rem;
+  --proficient-top:      72.4%;    --proficient-left:  75%;
+  --proficient-size:     1.45rem;
+  --about-text-width: 450px; 
+  --about-text-align: justify; 
+
+
+  --contact-title-top: 75%;
+  --contact-title-left: 75%;
+  --contact-font-color: #000;
+
+  --contact-p1-top: 63%;
+  --contact-p1-left: 25%;
+
+  --contact-p2-top: 70%;
+  --contact-p2-left: 25%;
+
+  --contact-p3-top: 77%;
+  --contact-p3-left: 25%;
+
+  --contact-width: 600px;
+  --contact-align: center;
+
+  --contact-font-size: 2rem;  
+--contact-text-align: left;   
+--contact-max-width: 500px;   
+--contact-icon-gap: 15px;
+--contact-icon-size: 40px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+    }
+
+    body {
+      font-family: 'Press Start 2P', 'VT323', 'Courier New', monospace;
+      background: #000;
+      color: #e0d0b0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: url('chad.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-15px); }
+    }
+
+    @keyframes skillFloat {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50%      { transform: translateY(-12px) rotate(3deg); }
+    }
+
+    .plane-banner {
+      position: absolute;
+      top: 0;
+      left: 5%;
+      width: 40vw;
+      max-width: 1050px;
+      z-index: 6;
+      pointer-events: none;
+      animation: float 5s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+    }
+
+    .plane-banner img { width: 100%; height: auto; object-fit: contain; }
+
+    .banner-text {
+      position: absolute;
+      z-index: 10;
+      top: var(--banner-text-top);
+      left: var(--banner-text-left);
+      font-size: var(--banner-font-size);
+      color: var(--banner-text-color);
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      text-transform: uppercase;
+      text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .character {
+      position: absolute;
+      bottom: 8%;
+      left: 12%;
+      width: 220px;
+      height: 270px;
+      z-index: 10;
+    }
+
+    .hero-wrap {
+      min-height: 100vh;
+      position: relative;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      z-index: 105;
+    }
+
+    .hero-spacer { height: 50vh; min-height: 420px; }
+
+    .fixed-nav {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      display: flex;
+      gap: 14px;
+      padding: 12px 24px;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      border-radius: 50px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    }
+
+    .nav-button {
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #d4b896, #b08d5e);
+      box-shadow: 0 4px 0 #2d1f12, 0 6px 14px rgba(0,0,0,0.5);
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 80px 8%;
+      position: relative;
+      background-position: var(--bg-pos);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-size: cover;
+      background-attachment: fixed;
+      color: #fff9e6;
+      text-shadow: 1px 1px 3px #000, 2px 2px 6px #000;
+      scroll-snap-align: start;
+    }
+
+    section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.65) 100%);
+      pointer-events: none;
+    }
+
+    section > * { position: relative; z-index: 1; max-width: 900px; width: 100%; }
+
+    section h1 { font-size: 2.6rem; color: #ffebcc; margin-bottom: 1.5rem; text-align: center; }
+
+    section p {
+      font-family: 'VT323', 'Courier New', monospace;
+      font-size: 1.35rem;
+      line-height: 1.65;
+      max-width: 800px;
+      color: #f5e8d3;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #about { background-image: url('about-bg.jpg'); }
+    #about p {
+      position: absolute;
+      top: var(--about-text-top);
+      right: var(--about-text-right);
+      max-width: 430px;
+      color: #ffffff;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 24px 32px;
+      border-radius: 12px;
+      text-align: justify;
+    }
+
+    #hobbies { background-image: url('hobbies-bg.png'); background-position: center; }
+
+    #hobbies h1 {
+      position: absolute;
+      top: var(--hobbies-title-top);
+      left: var(--hobbies-title-left);
+      font-size: var(--hobbies-title-size);
+      margin-bottom: 0;
+      z-index: 10;
+      white-space: nowrap;
+    }
+
+    .hobby-boxes {
+      position: absolute;
+      top: var(--hobby-box-top);
+      right: var(--hobby-box-right);
+      width: var(--hobby-box-width);
+      height: var(--hobby-box-height);
+      display: flex;
+      flex-direction: column;
+      gap: var(--hobby-box-gap);
+      z-index: 6;
+    }
+
+    .hobby-box {
+      height: var(--hobby-each-height);
+      background: rgba(255, 245, 220, 0.85);
+      border-radius: 12px;
+      padding: var(--hobby-box-padding);
+      font-family: var(--hobby-font-family);
+      font-size: var(--hobby-font-size);
+      color: var(--hobby-font-color);
+      line-height: 1.4;
+      text-shadow: none; 
+    }
+
+    #hobbies input[type="radio"] { display: none; }
+
+    .hobby-image {
+      position: absolute;
+      top: 62px;
+      left: 4.4%;
+      width: 320px;
+      height: 320px;
+      background-size: cover;
+      background-position: center;
+      border: 5px solid #ffb366;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    }
+
+    #hobby1:checked ~ .hobby-image { background-image: url('gaming.jpg'); }
+    #hobby2:checked ~ .hobby-image { background-image: url('pixelart.jpg'); }
+    #hobby3:checked ~ .hobby-image { background-image: url('coding.jpg'); }
+    #hobby4:checked ~ .hobby-image { background-image: url('tech.jpg'); }
+
+    .hobby-buttons {
+      position: absolute;
+      top: 500px;
+      left: 6%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 320px;
+      z-index: 10;
+    }
+
+    .hobby-buttons label {
+      width: 80%;
+      padding: 12px 20px;
+      background: #ffb366;
+      color: #000;
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 12px;
+      text-transform: uppercase;
+      text-align: center;
+      box-shadow: 0 4px 0 #3d2817;
+    }
+
+    #skills { background-image: url('skills-bg.jpg'); position: relative; }
+    
+    #skills {
+  position: relative;
+  overflow: hidden;
+}
+
+#skills h1 {
+  position: absolute;
+  top: var(--achievements-top);
+  left: var(--achievements-left);
+  transform: translate(-50%, -50%);
+  
+  font-size: var(--achievements-size);          
+  color: #ffebcc;
+  text-shadow: 3px 3px 6px #000, 0 0 15px rgba(255, 179, 102, 0.4);
+  white-space: nowrap;
+  z-index: 5;
+  margin: 0;
+  pointer-events: none;
+  
+
+  animation: gentleFloat 6.5s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+
+#skills p {
+  position: absolute;
+  top: var(--proficient-top);
+  left: var(--proficient-left);
+  transform: translate(-50%, -50%);
+  
+
+  text-align: justify;        
+  max-width: 700px;           
+  line-height: 1.6;           
+
+
+  font-size: var(--proficient-size);
+  font-family: 'VT323', monospace;
+  color: #f5e8d3;
+  z-index: 5;
+  margin: 0;
+  pointer-events: none;
+}
+
+    .skill-gallery {
+      position: absolute;
+      inset: 0;
+      pointer-events: none; 
+    }
+
+    .skill-card {
+      position: absolute; 
+      width: 150px;
+      height: 150px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 3px solid #ffb366;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+      animation: skillFloat 4s ease-in-out infinite;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, top 0.3s ease, left 0.3s ease;
+      pointer-events: auto;
+    }
+
+   
+    .skill-card:nth-child(1) { top: var(--skill-1-top); left: var(--skill-1-left); animation-delay: 0s; }
+    .skill-card:nth-child(2) { top: var(--skill-2-top); left: var(--skill-2-left); animation-delay: 0.5s; }
+    .skill-card:nth-child(3) { top: var(--skill-3-top); left: var(--skill-3-left); animation-delay: 1s; }
+    .skill-card:nth-child(4) { top: var(--skill-4-top); left: var(--skill-4-left); animation-delay: 1.5s; }
+
+    .skill-card:hover {
+      transform: scale(1.1) rotate(0deg) !important;
+      animation-play-state: paused;
+      border-color: #fff;
+      cursor: pointer;
+      z-index: 50;
+    }
+
+    .skill-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #contact { background-image: url('contact-bg.jpg'); }
+
+    .side-menu {
+      position: absolute;
+      top: 53%;
+      right: -150px;
+      transform: translateY(-50%);
+      width: 960px;
+      height: 700px;
+      z-index: 20;
+      background-image: url('sign.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: right center;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .side-menu-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+      pointer-events: auto;
+      margin-top: 120px;
+    }
+
+    .menu-button {
+      padding: 18px 50px;
+      border-radius: 10px;
+      font-size: 14px;
+      color: #000;
+      text-decoration: none;
+      display: inline-block;
+      background: linear-gradient(180deg, #d4b896, #b08d5e);
+      box-shadow: 0 6px 0 #2d1f12;
+      text-transform: uppercase;
+    }
+
+    #contact { 
+  background-image: url('contact-bg.jpg'); 
+  position: relative; 
+}
+
+#contact h1 {
+  position: absolute;
+  top: var(--contact-title-top);
+  left: var(--contact-title-left);
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+
+#contact p:nth-of-type(1) {
+  position: absolute;
+  top: var(--contact-p1-top);
+  left: var(--contact-p1-left);
+  transform: translate(-50%, -50%);
+  max-width: var(--contact-width);
+  text-align: var(--contact-align);
+}
+
+#contact p:nth-of-type(2) {
+  position: absolute;
+  top: var(--contact-p2-top);
+  left: var(--contact-p2-left);
+  transform: translate(-50%, -50%);
+  max-width: var(--contact-width);
+  text-align: var(--contact-align);
+}
+
+#contact p:nth-of-type(3) {
+  position: absolute;
+  top: var(--contact-p3-top);
+  left: var(--contact-p3-left);
+  transform: translate(-50%, -50%);
+  max-width: var(--contact-width);
+  text-align: var(--contact-align);
+}
+
+#contact p:nth-of-type(1), 
+#contact p:nth-of-type(2), 
+#contact p:nth-of-type(3) {
+  position: absolute;
+  display: flex;              
+  align-items: center;      
+  gap: var(--contact-icon-gap);
+  font-size: var(--contact-font-size);
+  text-align: var(--contact-text-align);
+  max-width: var(--contact-max-width);
+  color: #f5e8d3;
+  margin: 0;
+  white-space: nowrap;        
+}
+
+
+#contact p:nth-of-type(1) { top: var(--contact-p1-top); left: var(--contact-p1-left); }
+#contact p:nth-of-type(2) { top: var(--contact-p2-top); left: var(--contact-p2-left); }
+#contact p:nth-of-type(3) { top: var(--contact-p3-top); left: var(--contact-p3-left); }
+
+
+.contact-icon {
+  width: var(--contact-icon-size);
+  height: var(--contact-icon-size);
+  object-fit: contain;
+}
+
+  </style>
+</head>
+<body>
+
+  <nav class="fixed-nav">
+    <a href="#" class="nav-button">Home</a>
+    <a href="#about" class="nav-button">About Me</a>
+    <a href="#hobbies" class="nav-button">Hobbies</a>
+    <a href="#skills" class="nav-button">Skills</a>
+    <a href="#contact" class="nav-button">Contact</a>
+  </nav>
+
+  <div class="hero-wrap">
+    <div class="plane-banner">
+      <img src="airplane.jpg" alt="Airplane Banner">
+      <div class="banner-text">Welcome to Chad's<br>Personal Website</div>
+    </div>
+    <div class="character"></div>
+    <div class="hero-spacer"></div>
+    <div class="side-menu">
+      <div class="side-menu-buttons">
+        <a href="#about" class="menu-button">About Me</a>
+        <a href="#hobbies" class="menu-button">My Hobbies</a>
+        <a href="#skills" class="menu-button">My Achievements</a>
+        <a href="#contact" class="menu-button">Contact Me</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <p>I’m a college student with a strong interest in coding and game development. I enjoy learning new technologies and turning ideas into creative digital projects. My goal is to keep improving my skills and build games and applications that are both engaging and purposeful.</p>
+  </section>
+
+  <section id="hobbies">
+    <h1>MY HOBBIES</h1>
+    <input type="radio" name="hobby" id="hobby1" checked>
+    <input type="radio" name="hobby" id="hobby2">
+    <input type="radio" name="hobby" id="hobby3">
+    <input type="radio" name="hobby" id="hobby4">
+
+    <div class="hobby-image"></div>
+
+    <div class="hobby-buttons">
+      <label for="hobby1">Gaming</label>
+      <label for="hobby2">Badminton</label>
+      <label for="hobby3">Sleeping</label>
+      <label for="hobby4">EATING</label>
+    </div>
+
+    <div class="hobby-boxes">
+      <div class="hobby-box">
+        <strong>Gaming</strong><br>
+        Gaming allows me to explore different worlds and improve my strategic thinking.
+      </div>
+      <div class="hobby-box">
+        <strong>Badminton</strong><br>
+        Playing badminton keeps me active and improves my coordination.
+      </div>
+      <div class="hobby-box">
+        <strong>Sleeping</strong><br>
+        Sleeping helps me recharge and stay productive throughout the day.
+      </div>
+      <div class="hobby-box">
+        <strong>Eating</strong><br>
+        I enjoy trying different foods and discovering new flavors.
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h1>MY </h1>
+    <h1><br><br><br>ACHIEVEMENTS</h1>
+    <p>I’ve had a pretty legendary run so far, proving my versatility by crushing it in the gaming world as a 'Mobile Masters' champion and showing off my creative side through soulful guitar performances and traditional Balagtasan debates. I even dive into the world of science with successful volcanic experiments, always looking for the next challenge to tackle. Whether I’m competing with my crew or performing on stage, 
+      I know how to balance hard work with a lot of talent, making every win feel like a fun and rewarding milestone on my journey.</p>
+    
+    <div class="skill-gallery">
+      <div class="skill-card">
+        <img src="skill1.png" alt="HTML/CSS Icon">
+      </div>
+      <div class="skill-card">
+        <img src="skill2.png" alt="JS Icon">
+      </div>
+      <div class="skill-card">
+        <img src="skill3.png" alt="React Icon">
+      </div>
+      <div class="skill-card">
+        <img src="skill4.png" alt="Game Dev Icon">
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h1>CONTACT ME</h1>
+    <p><img src="icon1.png" class="contact-icon"><span>Chad Mejarito</span></p>
+    <p><img src="icon2.png" class="contact-icon"><span>chadwikseventeen@gmail.com</span></p>
+    <p><img src="icon3.png" class="contact-icon"><span>0995-217-0765</span></p>
+  </section> </body>
+</html>
+</body>
+</html>
